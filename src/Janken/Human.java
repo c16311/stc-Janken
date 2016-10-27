@@ -35,7 +35,7 @@ public class Human extends Player{
         do{
             System.out.print("[グー/1,チョキ/2,パー/3]:");
             hand = stdin.nextInt();
-        }while(hand<0||hand>4);
+        }while(hand<1||hand>3);
         return hand;
     }
 }
