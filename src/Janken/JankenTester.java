@@ -9,6 +9,10 @@ package Janken;
  * https://github.com/c16311/stc-Janken.git
  * @author c16311
  */
+/**
+ *
+ * @author c16311
+ */
 import java.util.Scanner;
 import java.util.Random;
 
@@ -23,7 +27,7 @@ public class JankenTester {
             case 3:System.out.println("パー");
             break;    
         }
-        
+       
     }
     /**メインプログラム*/
     public static void main(String[] args){
@@ -34,31 +38,45 @@ public class JankenTester {
         //人間クラスの宣言
         Human human = new Human("Zaki");
         //コンピュータクラスの宣言
-        Computer computer = new Computer("IOS");
+        Computer computer1 = new Computer("IOS");
+        Computer computer2 = new Computer("JUST");
         
         System.out.println("Human:"+human.getName());
-        System.out.println("Computer:"+computer.getName());
+        System.out.println("Computer1:"+computer1.getName());
+        System.out.println("Computer2:"+computer2.getName());
         System.out.println("ジャンケン勝負！");
         
         do{
             System.out.println("何を出す。");
             human.setHand(human.inputHand());        //人間の手のポーズを入力
             //コンピュータの手のポーズを生成
-            computer.setHand(computer.createHand(3));
+            computer1.setHand(computer1.createHand(3));
+            computer2.setHand(computer1.createHand(3));
             
-            if(human.judge(computer)==1)
-                System.out.println(human.getName()+"の勝ち");
-            else if(human.judge(computer)==-1)
-                System.out.println(computer.getName()+"の勝ち");
-            else
-                System.out.println("引き分け");
+            switch(human.judge(computer1,computer2)){
+                case 0:System.out.println("引き分け");
+                break;
+                case 1:System.out.println(human.getName()+"の勝ち");
+                break;
+                case 2:System.out.println(computer1.getName()+"の勝ち");
+                break;
+                case 3:System.out.println(computer2.getName()+"の勝ち");
+                break;
+                case 4:System.out.println(human.getName()+"と"+computer1.getName()+"の勝ち");
+                break;
+                case 5:System.out.println(human.getName()+"と"+computer2.getName()+"の勝ち");
+                break;
+                case 6:System.out.println(computer1.getName()+"と"+computer2.getName()+"の勝ち");
+                break;
+            }
 
             System.out.print("Human:");     handPrint(human.getHand());
-            System.out.print("Computer:");  handPrint(computer.getHand());
+            System.out.print("Computer1:");  handPrint(computer1.getHand());
+            System.out.print("Computer2:");  handPrint(computer2.getHand());
 
-            System.out.print("続けますか？[Yes/0:No:1]:");
+            System.out.print("続けますか？[Yes/0:No:Other]:");
             flag = stdin.nextInt();
             //勝負はやめるまで続ける
-        }while(flag==0);
+        }while(flag!=0);
     }
 }
